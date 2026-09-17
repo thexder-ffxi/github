@@ -1,0 +1,13 @@
+name: Build addon
+description: Builds a zip-file from current addon
+
+inputs:
+  access-token:
+    description: 'PAT with repository scope (https://github.com/settings/tokens)'
+    required: false
+
+runs:
+  using: 'composite'
+  steps:
+    - name: build addon 
+      uses: thexder-ffxi/github/.github/workflows/build.yml@main
