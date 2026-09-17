@@ -27,7 +27,7 @@ runs:
       uses: actions/checkout@v4
         
     - name: install addon environment
-      uses: thexder-ffxi/actions/install-addon-environment@main
+      uses: thexder-ffxi/github/actions/install-addon-environment@main
       with:
         access-token: ${{ inputs.access-token }} # private repo access
 
@@ -41,9 +41,9 @@ runs:
       shell: bash
 
     - name: test addon
-      uses: thexder-ffxi/actions/test-addon@main
+      uses: thexder-ffxi/github/actions/test-addon@main
       with:
         args: "--config-file=bstd.lua"
 
     - name: build addon artefact
-      uses: thexder-ffxi/actions/build-addon@main
+      uses: thexder-ffxi/github/actions/build-addon@main
