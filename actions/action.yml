@@ -1,0 +1,10 @@
+name: Test
+description: Test
+
+runs:
+  using: 'composite'
+  steps:
+    - name: echo
+      run: |
+        echo "Test"
+      shell: bash
