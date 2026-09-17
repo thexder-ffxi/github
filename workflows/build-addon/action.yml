@@ -8,19 +8,20 @@ inputs:
 
 runs:
   using: 'composite'
-  runs-on: ubuntu-latest
   steps:
     - name: install lua 5.1
       run: |
         set -x
         sudo apt-get update
         sudo apt-get install lua5.1
+      shell: bash
         
     - name: base directory
       run: |
         git --version
         lua -v
         pwd
+      shell: bash
 
     - name: checkout "${{github.repository}}"
       uses: actions/checkout@v4
@@ -28,7 +29,7 @@ runs:
     - name: install addon environment
       uses: thexder-ffxi/actions/install-addon-environment@main
       with:
-        access-token: ${{ secrets.ALL_REPO_ACCESS }} # private repo access
+        access-token: ${{ inputs.access-token }} # private repo access
 
     - name: check directories
       run: |
@@ -37,6 +38,7 @@ runs:
         cd ..
         pwd
         ls -d */
+      shell: bash
 
     - name: test addon
       uses: thexder-ffxi/actions/test-addon@main
