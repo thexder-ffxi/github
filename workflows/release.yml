@@ -1,0 +1,43 @@
+name: Release addon
+on:
+  workflow_call: 
+    
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+    - name: install lua 5.1
+      run: |
+        set -x
+        sudo apt-get update
+        sudo apt-get install lua5.1
+        
+    - name: base directory
+      run: |
+        git --version
+        lua -v
+        pwd
+
+    - name: checkout "${{github.repository}}"
+      uses: actions/checkout@v4
+        
+    - name: install addon environment
+      uses: ./.github/actions/install-addon-environment
+      with:
+        access-token: ${{ secrets.ALL_REPO_ACCESS }} # private repo access
+
+    - name: check directories
+      run: |
+        pwd
+        ls -d */
+        cd ..
+        pwd
+        ls -d */
+
+    - name: Run Busted
+      uses: ./.github/actions/run-busted
+      with:
+        args: "--config-file=bstd.lua"
+
+    - name: release addon artefact
+      uses: ./.github/actions/release-addon

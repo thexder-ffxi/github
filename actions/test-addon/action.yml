@@ -1,0 +1,33 @@
+name: Test addon
+description: Installs and runs Busted
+
+inputs:
+  args: 
+    description: "additional busted arguments"
+    required: false
+
+runs:
+  using: 'composite'
+  steps:
+  - name: Install busted
+    run: |
+      set -x
+      sudo apt-get update
+      sudo apt-get install luarocks -y
+      # luarocks install inspect
+      # luarocks install luacov
+      # luarocks install luacov-multiple
+      sudo luarocks install busted
+      # luarocks install busted-hjtest
+    shell: bash
+  - name: Run busted
+    run: |
+      # mkdir -p test-results
+      busted ${{ inputs.args }}
+      # luacov -c priv/lua/.luacov-ci
+      # cat luacov.report.out
+    shell: bash
+
+branding:
+  icon: check
+  color: yellow

@@ -1,0 +1,47 @@
+name: Install Windower Environment
+description: Clones and initializes windower environment
+
+inputs:
+  access-token:
+    description: 'PAT with repository scope (https://github.com/settings/tokens)'
+    required: false
+
+runs:
+  using: 'composite'
+  steps:
+    - name: clone "thexder-ffxi/windower"
+      uses: ./.github/actions/clone-github-repo
+      with:
+        owner: thexder-ffxi
+        repository: windower
+        access-token: ${{ inputs.access-token }} # private repo access
+        depth: 1
+        branch: main
+        path: $RUNNER_WORKSPACE
+    - name: clone "Windower/Lua"
+      uses: ./.github/actions/clone-github-repo
+      with:
+        owner: Windower
+        repository: Lua
+        depth: 1
+        branch: stable
+        path: $RUNNER_WORKSPACE/windower
+    - name: run windower/env/transform_libs_to_standard.lua
+      run: |
+        cd $RUNNER_WORKSPACE/windower/env
+        lua transform_libs_to_standard.lua
+      shell: bash
+
+    - name: clone "Windower/Resources"
+      uses: ./.github/actions/clone-github-repo
+      with:
+        owner: Windower
+        repository: Resources
+        depth: 1
+        branch: master
+        path: $RUNNER_WORKSPACE/windower
+    - name: run windower/env/transform_libs_to_standard.lua
+      run: |
+        cd $RUNNER_WORKSPACE/windower/env
+        lua copy_resources_to_res.lua
+      shell: bash
