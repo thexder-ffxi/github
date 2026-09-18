@@ -12,7 +12,7 @@ runs:
     - name: build addon
       if: startsWith(github.ref, 'refs/tags/')
       run: |
-        set -x
+        # set -x
         cd $GITHUB_WORKSPACE
         lua build.lua 
         mdFiles=`ls *.md | wc -l`
@@ -24,8 +24,6 @@ runs:
         mkdir release
         cd ./build
         tar -cpzf ../release/$filename.zip ./*
-        pwd
-        ls -Rl ../build
       shell: bash
 
     - name: release addon
