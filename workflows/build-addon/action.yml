@@ -21,6 +21,7 @@ runs:
         echo "${{ github.ref }}|${{ github.event.ref }}"
         git --version
         lua -v
+        env
         pwd
       shell: bash
 
@@ -28,7 +29,7 @@ runs:
       uses: actions/checkout@v4
         
     - name: install addon environment
-      uses: thexder-ffxi/github/actions/install-addon-environment@{{ github.ref }}
+      uses: thexder-ffxi/github/actions/install-addon-environment@main
       with:
         access-token: ${{ inputs.access-token }} # private repo access
 
