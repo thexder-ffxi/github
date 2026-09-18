@@ -14,12 +14,15 @@ runs:
         set -x
         sudo apt-get update
         sudo apt-get install lua5.1
+      shell: bash
+
         
     - name: base directory
       run: |
         git --version
         lua -v
         pwd
+      shell: bash
 
     - name: checkout "${{github.repository}}"
       uses: actions/checkout@v4
@@ -36,6 +39,7 @@ runs:
         cd ..
         pwd
         ls -d */
+      shell: bash
 
     - name: test addon
       uses: thexder-ffxi/github/actions/test-addon@main
