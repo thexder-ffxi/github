@@ -10,7 +10,7 @@ runs:
   using: 'composite'
   steps:
     - name: clone "thexder-ffxi/common"
-      uses: ./.github/actions/clone-github-repo
+      uses: $/actions/clone-github-repo
       with:
         owner: thexder-ffxi
         repository: common
@@ -20,6 +20,6 @@ runs:
         path: $RUNNER_WORKSPACE
 
     - name: install windower environment
-      uses: ./.github/actions/install-windower-environment
+      uses: $/actions/install-windower-environment
       with:
         access-token: ${{ inputs.access-token }} # private repo access
