@@ -29,7 +29,7 @@ runs:
       uses: actions/checkout@v4
         
     - name: install addon environment
-      uses: $./actions/install-addon-environment
+      uses: $/actions/install-addon-environment
       with:
         access-token: ${{ inputs.access-token }} # private repo access
 
