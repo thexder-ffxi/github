@@ -10,7 +10,7 @@ runs:
   using: 'composite'
   steps:
     - name: clone "thexder-ffxi/windower"
-      uses: ./.github/actions/clone-github-repo
+      uses: $/actions/clone-github-repo
       with:
         owner: thexder-ffxi
         repository: windower
@@ -18,29 +18,32 @@ runs:
         depth: 1
         branch: main
         path: $RUNNER_WORKSPACE
+
     - name: clone "Windower/Lua"
-      uses: ./.github/actions/clone-github-repo
+      uses: $/actions/clone-github-repo
       with:
         owner: Windower
         repository: Lua
         depth: 1
         branch: stable
         path: $RUNNER_WORKSPACE/windower
-    - name: run windower/env/transform_libs_to_standard.lua
+
+    - name: transform windower libs to standard lua 5.1
       run: |
         cd $RUNNER_WORKSPACE/windower/env
         lua transform_libs_to_standard.lua
       shell: bash
 
     - name: clone "Windower/Resources"
-      uses: ./.github/actions/clone-github-repo
+      uses: $/actions/clone-github-repo
       with:
         owner: Windower
         repository: Resources
         depth: 1
         branch: master
         path: $RUNNER_WORKSPACE/windower
-    - name: run windower/env/transform_libs_to_standard.lua
+
+    - name: copy windower resources
       run: |
         cd $RUNNER_WORKSPACE/windower/env
         lua copy_resources_to_res.lua

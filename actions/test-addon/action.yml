@@ -1,5 +1,5 @@
 name: Test addon
-description: Installs and runs Busted
+description: Installs Busted and runs tests
 
 inputs:
   args: 
@@ -9,9 +9,9 @@ inputs:
 runs:
   using: 'composite'
   steps:
-  - name: Install busted
+  - name: i§nstall busted
     run: |
-      set -x
+      # set -x
       sudo apt-get update
       sudo apt-get install luarocks -y
       # luarocks install inspect
@@ -20,7 +20,8 @@ runs:
       sudo luarocks install busted
       # luarocks install busted-hjtest
     shell: bash
-  - name: Run busted
+
+  - name: test addon
     run: |
       # mkdir -p test-results
       busted ${{ inputs.args }}

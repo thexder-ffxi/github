@@ -11,7 +11,7 @@ runs:
   steps:
     - name: build artefact
       run: |
-        set -x
+        # set -x
         cd $GITHUB_WORKSPACE
         lua build.lua
         mdFiles=`ls *.md | wc -l`
@@ -20,9 +20,8 @@ runs:
         fi
         filename=`echo "${{github.repository}}" | cut -d/ -f2`
         echo "ARTEFACT_NAME=$filename" >> $GITHUB_ENV
-        pwd
-        ls -Rl ./build
       shell: bash
+      
     - name: upload artifact 
       uses: actions/upload-artifact@v7
       with:

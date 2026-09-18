@@ -26,9 +26,9 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - name: Clone repository "${{ inputs.owner }}/${{ inputs.repository }}"
+    - name: clone repository "${{ inputs.owner }}/${{ inputs.repository }}"
       run: |
-        set -x
+        # set -x
 
         repoUrl="github.com"
         if [ -n "${{ inputs.access-token }}" ]; then

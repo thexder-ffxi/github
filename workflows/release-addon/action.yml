@@ -11,40 +11,23 @@ runs:
   steps:
     - name: install lua 5.1
       run: |
-        set -x
+        # set -x
         sudo apt-get update
         sudo apt-get install lua5.1
-      shell: bash
-
-        
-    - name: base directory
-      run: |
-        git --version
-        lua -v
-        pwd
       shell: bash
 
     - name: checkout "${{github.repository}}"
       uses: actions/checkout@v4
         
     - name: install addon environment
-      uses: thexder-ffxi/github/actions/install-addon-environment@main
+      uses: $/actions/install-addon-environment
       with:
         access-token: ${{ inputs.access-token }} # private repo access
 
-    - name: check directories
-      run: |
-        pwd
-        ls -d */
-        cd ..
-        pwd
-        ls -d */
-      shell: bash
-
     - name: test addon
-      uses: thexder-ffxi/github/actions/test-addon@main
+      uses: $/actions/test-addon
       with:
         args: "--config-file=bstd.lua"
 
     - name: release addon artefact
-      uses: thexder-ffxi/github/actions/release-addon@main
+      uses: $/actions/release-addon
